@@ -69,7 +69,7 @@ function namesList(arrayName, listElement, errorDiv = errorElement) {
  
   arrayName.forEach(object => {
     if (!object.name) {
-      let errorMessage = `Error!!!!!! \n The object: ${JSON.stringify(object, null, 2)} \n is missing a "name" property!!!!`
+      let errorMessage = `Error! The object: ${JSON.stringify(object, null, 2)} is missing a "name" property!`
       console.error(errorMessage);
       const errorInfo = document.createElement("li");
       errorInfo.id = 'failed-objects';

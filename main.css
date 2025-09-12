@@ -133,7 +133,7 @@ ul li:last-child {
 @media (max-width: 768px) {
   body {
     padding: 10px;
-  }
+  } 
 
   header {
     padding: 1.5rem;

@@ -63,31 +63,39 @@ function renderByAge(array, threshold, elementId) {
 renderByAge(users, 50, "age-filter-list");
 
 // 5. Add error handling to your functions that will log an error message using console.error() if any object doesn't have a "name" property. Display any error messages in the div with id "error-messages"
-function safeRender(array, elementId, errorId) {
-  const ul = document.getElementById(elementId);
-  const errorDiv = document.getElementById(errorId);
-
-  ul.innerHTML = "";
+function namesList(arrayName, listElement, errorDiv = errorElement) {
+  listElement.innerHTML = "";
   errorDiv.innerHTML = "";
-
-  array.forEach(user => {
-    try {
-      if (!user.name) {
-        throw new Error("Missing 'name' property in object: " + JSON.stringify(user));
-      }
-
-      const li = document.createElement("li");
-      li.textContent = user.name;
-      ul.appendChild(li);
-
-    } catch (err) {
-      console.error(err.message);
-
-      const errorMsg = document.createElement("div");
-      errorMsg.classList.add("error-message");
-      errorMsg.textContent = err.message;
-      errorDiv.appendChild(errorMsg);
+ 
+  arrayName.forEach(object => {
+    if (!object.name) {
+      let errorMessage = `Error!!!!!! \n The object: ${JSON.stringify(object, null, 2)} \n is missing a "name" property!!!!`
+      console.error(errorMessage);
+      const errorInfo = document.createElement("li");
+      errorInfo.id = 'failed-objects';
+      errorInfo.textContent = errorMessage;
+      listElement.append(errorInfo);
+    } else {
+    const item = document.createElement("li");
+    item.id = 'passed-objects';
+    item.textContent = object.name;
+    listElement.append(item);
     }
   });
+ 
 }
-safeRender(users, "error-handling-list", "error-messages");
+
+// broken test data for exercise 5
+const errorElement = document.getElementById("error-messages");
+const errorHandling = document.getElementById("error-handling-list");
+ 
+const broken = [
+  { id: 1, name: "Skibidi", age: 39 },
+  { id: 2, name },
+  { id: 3, age: 677777},
+  { id: 4, name: "Theo", age: 3 },
+  { id: 5, name: "", age: 10 },
+  { id: 6, name: "Levi", age: 67 },
+];
+ 
+namesList(broken, errorHandling, errorElement);

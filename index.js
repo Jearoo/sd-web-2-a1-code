@@ -14,8 +14,6 @@ const users = [
   { id: 10, name: "Padmé Amidala", age: 27 },
 ];
 
-// broken test data for exercise 6
-
 // 1. Print out the names of each character in the console, then render them in the HTML list with id "names-list"
 users.forEach(user => {
   console.log(user.name);
@@ -36,7 +34,7 @@ users
 // 3. Create a reusable function that takes any array and uses logic to render a list of character names in the HTML. Use this function to populate the list with id "function-list"
 function renderList(array, elementId) {
   const ul = document.getElementById(elementId);
-  ul.innerHTML = ""; // clear old content
+  ul.innerHTML = ""; 
 
   array.forEach(user => {
     if (user.name) {
@@ -66,24 +64,26 @@ renderByAge(users, 50, "age-filter-list");
 function namesList(arrayName, listElement, errorDiv = errorElement) {
   listElement.innerHTML = "";
   errorDiv.innerHTML = "";
- 
+
   arrayName.forEach(object => {
     if (!object.name) {
-      let errorMessage = `Error! The object: ${JSON.stringify(object, null, 2)} is missing a "name" property!`
+      let errorMessage = `Error! The object: ${JSON.stringify(object, null, 2)} is missing a "name" property!`;
       console.error(errorMessage);
+
       const errorInfo = document.createElement("li");
-      errorInfo.id = 'failed-objects';
+      errorInfo.id = 'failed-objects';      
+      errorInfo.classList.add("error-message");     
       errorInfo.textContent = errorMessage;
       listElement.append(errorInfo);
     } else {
-    const item = document.createElement("li");
-    item.id = 'passed-objects';
-    item.textContent = object.name;
-    listElement.append(item);
+      const item = document.createElement("li");
+      item.id = 'passed-objects';
+      item.textContent = object.name;
+      listElement.append(item);
     }
   });
- 
 }
+
 
 // broken test data for exercise 5
 const errorElement = document.getElementById("error-messages");
